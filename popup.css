@@ -1,0 +1,14 @@
+body {
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+  }
+  
+  #toolbar {
+    text-align: center;
+  }
+  
+  #button {
+    padding: 5px 10px;
+  }
+  
