@@ -1,4 +1,8 @@
-// background.js
-console.log("Background script loaded.");
-
-// Add your background script logic here
+/*chrome.runtime.onMessage.addListener(
+  function(request) {
+      if (request.item) {
+          const receivedItemData = request.item;
+          console.log("Received item data in background.js:", receivedItemData);
+      }
+  }
+);*/
