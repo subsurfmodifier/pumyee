@@ -5,10 +5,14 @@
     "description": "Converts HTML content to CSV",
     "permissions": [
       "activeTab",
+      "tabs",
       "webNavigation",
       "webRequest",
       "storage"
     ],
+    "background": {
+      "service_worker": "service_worker.js"
+    },
     "action": {
       "default_icon": {
         "16": "images/icon-16.png",
