@@ -9,8 +9,7 @@ const observer = new MutationObserver(function (mutations, mutationInstance) {
           itemList.forEach((item) => {
             elementList.push(item.textContent); 
           });
-          const itemName = 'Item' + '\n' + elementList.join('\n');
-          console.log(itemName);
+          chrome.runtime.sendMessage({type: 'variable', data: elementList});         
         } 
       });
     } 
