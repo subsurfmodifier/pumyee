@@ -6,9 +6,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         console.log(blob);
         console.log('lala');
         const button = document.getElementById('download');
-        console.log(button);
-
-        button.removeEventListener('click', handleButtonClick);
 
         button.addEventListener('click', handleButtonClick);
 

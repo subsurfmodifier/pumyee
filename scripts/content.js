@@ -28,6 +28,11 @@ const observer = new MutationObserver(function (mutations, mutationInstance) {
                   elementString += ',' + quantity.value;
                   console.log(elementString);
                   elementList.push(elementString);
+                  if(i === count) {
+                    console.log('beautiful');
+                    console.log(elementList);
+                    chrome.runtime.sendMessage({ type: 'variable', data: elementList });
+                  }
 
                 } else {
                   console.log(i + 'th quantity is not found');
