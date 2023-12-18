@@ -6,9 +6,8 @@ const observer = new MutationObserver(function (mutations, mutationInstance) {
       mutation.addedNodes.forEach(function (addedNode) {
         if (addedNode.id === 'cart_body' && addedNode.firstChild.className === 'inner_cont') {
           console.log('content script is running');
-          chrome.runtime.sendMessage({ content: 'content scrips is ready', ID : 1 }, function (response) {
+          chrome.runtime.sendMessage({ content: 'content scripst is ready', ID : 1 }, function (response) {
             console.log(response.acknowledgement);
-            console.log('sent message to service worker');
           });
         }
       });
@@ -45,6 +44,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
               console.log('checkbox is not found');
               chrome.runtime.sendMessage({ ID: 7, command: 'show paragraph' } , function (response) {
                 console.log(response.acknowledgement);
+                console.log('sent', message.ID);
               });
             } else {
               if (document.querySelector(checkboxQuery).textContent !== '0') {
@@ -85,7 +85,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
           chrome.runtime.sendMessage({ ID: 5, type: 'variable', data: elementList } , function (response) {
             console.log(response.acknowledgement);
           });
-          console.log('sent message 5 to service worker');
+          console.log('sent', message.ID);
     } else {
       console.log('message is not received');
     }

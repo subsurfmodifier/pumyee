@@ -12,6 +12,11 @@ body {
     padding: 5px 10px;
   }
   
-  #download{
+  #download {
     padding: 5px 10px;
+  }
+
+  #warning_content {
+    color:brown;
+    background-color:yellow;
   }
