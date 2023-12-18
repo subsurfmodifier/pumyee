@@ -38,7 +38,9 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             console.log(link);
             link.href = URL.createObjectURL(blob);
             link.download = 'data.csv';
-            link.click();
+            button.addEventListener('click', function () {
+                link.click();
+            });
         }
     });
 });
