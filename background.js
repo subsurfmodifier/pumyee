@@ -53,7 +53,16 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
 console.log('service worker is still running');
 
-
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.ID === 7) {
+        console.log(message.ID);
+        console.log(message.command);
+        sendResponse({ acknowledgement: 'command received' });
+        chrome.runtime.sendMessage({ ID: 8, command: 'show paragraph' } , function (response) {
+            console.log(response.acknowledgement);
+        });
+    }
+});
     
       
 

@@ -45,7 +45,17 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     });
 });
 
-
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) { 
+    if(message.ID === 7) {
+        console.log(message.ID);
+        console.log(message.command);
+        sendResponse({ acknowledgement: 'command received' });
+        const warning = document.getElementById('warning');
+        const paragraph = document.createElement('p');
+        warning.appendChild(paragraph);
+        paragraph.textContent = 'Please select an item';
+    }
+});
 
 
 

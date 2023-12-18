@@ -41,10 +41,13 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             itemNameQuery = '#cart_list > ol > li:nth-child(' + i + ') > div.cart--basket_body > div > ul > li > div > div.item_info > dl > dd > div.section.item_title > a > span';
             priceQuery = '#cart_list > ol > li:nth-child(' + i + ') > div.cart--basket_body > div > ul > li > div > div.item_info > dl > dd > div.section__wrapper > div.section__item--right > div.section.item_price > span > span > strong';
             quantityQuery = '#cart_list > ol > li:nth-child(' + i + ') > div.cart--basket_body > div > ul > li > div > div.item_info > dl > dd > div.section__wrapper > div.section__item--left > div.section.item_qty > div > input';
-            if(document.querySelector(checkboxQuery) == null) {
+            if(document.querySelector(checkboxQuery) === null) {
               console.log('checkbox is not found');
+              chrome.runtime.sendMessage({ ID: 7, command: 'show paragraph' } , function (response) {
+                console.log(response.acknowledgement);
+              });
             } else {
-              if (document.querySelector(checkboxQuery).textContent !== 0) {
+              if (document.querySelector(checkboxQuery).textContent !== '0') {
                 item = document.querySelector(itemNameQuery);
                 if (item !== null) {
                   price = document.querySelector(priceQuery);
