@@ -10,7 +10,6 @@ self.addEventListener('install', (event) => {
                 '/',
                 './scripts/content.js',
                 './manifest.json',
-                './message.js',
                 './popup.css',
                 './popup.html',
                 './popup.js',
@@ -54,7 +53,6 @@ messageReceiverHandler(3, 'execute content script to content');
 messageReceiverHandler(5, 'sending elementList to the popup', storage);
 messageReceiverHandler(8, 'show warning paragraph');
 
-    
 
 
       
