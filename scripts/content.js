@@ -1,14 +1,20 @@
 console.log('this is content script');
+importScripts('./message.js');
+
+const messageReceiverHandler = module.messageReceiverHandler;
+let itemNameQuery = null;
+let priceQuery = null;
+let quantityQuery = null;
+let item = null;
+let price = null;
+let quantity = null;
 
 const observer = new MutationObserver(function (mutations, mutationInstance) {
   mutations.forEach(function (mutation) {
     if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
       mutation.addedNodes.forEach(function (addedNode) {
         if (addedNode.id === 'cart_body' && addedNode.firstChild.className === 'inner_cont') {
-          console.log('content script is running');
-          chrome.runtime.sendMessage({ content: 'content scripst is ready', ID : 1 }, function (response) {
-            console.log(response.acknowledgement);
-          });
+          chrome.runtime.sendMessage({  ID : 1, conmmand: 'content scripst is ready'});
         }
       });
     }
@@ -20,20 +26,7 @@ observer.observe(document, {
   subtree: true,
 });
 
-let itemNameQuery = null;
-let priceQuery = null;
-let quantityQuery = null;
-let elementString = null;
-let item = null;
-let price = null;
-let quantity = null;
-
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) { 
-    if (message.ID === 4) {
-      console.log(message.ID);
-      console.log(message.command);
-      sendResponse({ acknowledgement: 'command received' });
-      const elementList = [];
+const elementList = [];
       const count = document.querySelectorAll('#cart_list > ol > li').length;
           for (let i = 1; i <= count; i++) {
             checkboxQuery = '#cart_list > ol > li:nth-child(' + i + ') > div.cart--basket_footer > div > div:nth-child(1) > span.format-price > span > strong';
@@ -42,10 +35,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             quantityQuery = '#cart_list > ol > li:nth-child(' + i + ') > div.cart--basket_body > div > ul > li > div > div.item_info > dl > dd > div.section__wrapper > div.section__item--left > div.section.item_qty > div > input';
             if(document.querySelector(checkboxQuery) === null) {
               console.log('checkbox is not found');
-              chrome.runtime.sendMessage({ ID: 7, command: 'show paragraph' } , function (response) {
-                console.log(response.acknowledgement);
-                console.log('sent', message.ID);
-              });
+              chrome.runtime.sendMessage({ ID: 7, command: 'show paragraph' });
             } else {
               if (document.querySelector(checkboxQuery).textContent !== '0') {
                 item = document.querySelector(itemNameQuery);
@@ -60,11 +50,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                       console.log(elementString);
                       elementList.push(elementString);
                       if (i === count) {
-                        console.log('beautiful');
-                        console.log(elementList);
-                        chrome.runtime.sendMessage({ type: 'variable', data: elementList });
+                        console.log('this is the elementList:' , elementList);
                       }
-  
                     } else {
                       console.log(i + 'th quantity is not found');
                     }
@@ -80,13 +67,11 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             }  
               
           };
-          console.log('beautiful');
-          console.log(elementList);
-          chrome.runtime.sendMessage({ ID: 5, type: 'variable', data: elementList } , function (response) {
-            console.log(response.acknowledgement);
-          });
-          console.log('sent', message.ID);
-    } else {
-      console.log('message is not received');
-    }
-});
+
+const storage = {variable : elementList};
+messageReceiverHandler(4, 'sending elementList to the background', storage);
+
+
+
+
+      
