@@ -1,0 +1,37 @@
+{
+    "manifest_version": 3,
+    "name": "Web Page to CSV",
+    "version": "2.0",
+    "description": "Converts HTML content to CSV",
+    "permissions": [
+      "activeTab",
+      "tabs",
+      "webNavigation",
+      "webRequest",
+      "storage"
+    ],
+    "background": {
+      "service_worker": "service_worker.js"
+    },
+    "action": {
+      "default_icon": {
+        "16": "images/icon-16.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+      },
+      "default_title": "Convert to CSV",
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "16": "images/icon-16.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://cart.gmarket.co.kr/ko/pc/cart/*"],
+        "js": ["scripts/content.js"],
+        "run_at": "document_idle"
+      }
+    ]
+  }
