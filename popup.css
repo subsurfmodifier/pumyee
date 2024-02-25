@@ -8,7 +8,11 @@ body {
     text-align: center;
   }
   
-  #button {
+  #create {
+    padding: 5px 10px;
+  }
+
+  #download {
     padding: 5px 10px;
   }
   
