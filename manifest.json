@@ -5,11 +5,7 @@
     "description": "Converts HTML content to CSV",
     "permissions": [
       "activeTab",
-      "tabs",
-      "webNavigation",
-      "webRequest",
-      "storage",
-      "nativeMessaging"
+      "tabs"
     ],
     "background": {
       "service_worker": "background.js"
