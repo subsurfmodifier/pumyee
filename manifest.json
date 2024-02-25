@@ -11,7 +11,7 @@
       "storage"
     ],
     "background": {
-      "service_worker": "service_worker.js"
+      "service_worker": "background.js"
     },
     "action": {
       "default_icon": {
@@ -29,9 +29,8 @@
     },
     "content_scripts": [
       {
-        "matches": ["https://cart.gmarket.co.kr/ko/pc/cart/*"],
-        "js": ["scripts/content.js"],
-        "run_at": "document_idle"
+        "matches": ["https://cart.gmarket.co.kr/*"],
+        "js": ["scripts/content.js"]
       }
     ]
   }
