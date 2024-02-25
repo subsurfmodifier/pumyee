@@ -1,17 +1,14 @@
 console.log('popup running');
 
-await chrome.runtime.sendMessage({message: 'hello from popup'});
+const create = document.getElementById('create');
+console.log(create);
+create.addEventListener('click', sendMessage);
+async function sendMessage() {
+  const activeTab = await chrome.tabs.query({active: true, currentWindow: true});
+  const response = await chrome.tabs.sendMessage(activeTab[0].id, {message: 'lala'});
+  console.log(response);
 
-document.addEventListener('DOMContentLoaded', function() {
-    const sendMessageButton = document.getElementById('myButton');
-    
-    sendMessageButton.addEventListener('click', async function() {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      
-      console.log(tab);
-
-      //await chrome.tabs.sendMessage(tab.id, {message: 'hello from popup'})
-      await chrome.runtime.sendMessage({message: 'hello from popup'});
-    });
-
-});
+  chrome.tabs.sendMessage(activeTab[0].id, {message: 'lala'}, function (response) {
+    console.log(response);
+  });
+}
