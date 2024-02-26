@@ -17,3 +17,11 @@ body {
   font-weight: bold;
   padding: 10px;
 }
+
+#reference {
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 10px;
+}

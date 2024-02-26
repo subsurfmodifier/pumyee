@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   let price = null;
   let quantity = null;
   let elementList = [];
-  const count = document.querySelectorAll('#cart_list > ol > li').length-1;
+  const count = document.querySelectorAll('#cart_list > ol > li').length;
   if (request.message === 'download') {
     for (let i = 1; i <= count; i++) {
       checkboxQuery = '#cart_list > ol > li:nth-child(' + i + ') > div.cart--basket_footer > div > div:nth-child(1) > span.format-price > span > strong';
@@ -27,7 +27,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
               quantity = document.querySelector(quantityQuery);
               if (quantity !== null) {
                 console.log('lulu');
-                elementString += ',' + quantity.value;
+                elementString += ',' + quantity.value + ',' + price.textContent.replace(/,/g, '')*quantity.value;
                 console.log(elementString);
                 elementList.push(elementString);
                 console.log(elementList);
@@ -49,7 +49,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log('message is not received');
   }
   if(elementList.length !== 0) {
-    const itemName = '품목, 가격, 수량' + '\n' + elementList.join('\n');
+    const itemName = '품목, 단가, 수량, 가격' + '\n' + elementList.join('\n');
     const blob = new Blob([itemName]);
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);

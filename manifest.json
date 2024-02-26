@@ -27,7 +27,12 @@
     "content_scripts": [
       {
         "matches": ["https://cart.gmarket.co.kr/ko/pc/cart/*"],
-        "js": ["scripts/content.js"],
+        "js": ["scripts/gmarket.js"],
+        "run at": "document_end"
+      },
+      {
+        "matches": ["https://www.i-screammall.co.kr/order/cart/*"],
+        "js": ["scripts/iscreammall.js"],
         "run at": "document_end"
       }
     ]
