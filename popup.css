@@ -11,3 +11,8 @@ body {
 #button {
   padding: 5px 10px;
 }
+
+#warning {
+  background-color: lightgray;
+  color: blue;
+}
