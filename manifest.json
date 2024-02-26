@@ -26,7 +26,7 @@
     },
     "content_scripts": [
       {
-        "matches": ["<all_urls>"],
+        "matches": ["https://cart.gmarket.co.kr/ko/pc/cart/*"],
         "js": ["scripts/content.js"],
         "run at": "document_end"
       }
