@@ -1,15 +1,16 @@
 console.log('content.js running');
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  let itemNameQuery = null;
-  let priceQuery = null;
-  let quantityQuery = null;
-  let item = null;
-  let price = null;
-  let quantity = null;
-  let elementList = [];
-  const count = document.querySelectorAll('#cart_list > ol > li').length;
   if (request.message === 'download') {
+    let itemNameQuery = null;
+    let priceQuery = null;
+    let quantityQuery = null;
+    let item = null;
+    let price = null;
+    let quantity = null;
+    let elementList = [];
+    const count = document.querySelectorAll('#cart_list > ol > li').length;
+
     for (let i = 1; i <= count; i++) {
       checkboxQuery = '#cart_list > ol > li:nth-child(' + i + ') > div.cart--basket_footer > div > div:nth-child(1) > span.format-price > span > strong';
       itemNameQuery = '#cart_list > ol > li:nth-child(' + i + ') > div.cart--basket_body > div > ul > li > div > div.item_info > dl > dd > div.section.item_title > a > span';
@@ -45,19 +46,19 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         };
       }
     };
+    if(elementList.length !== 0) {
+      const itemName = '품목, 단가, 수량, 가격' + '\n' + elementList.join('\n');
+      const blob = new Blob([itemName]);
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'data.csv';
+      link.click();
+    } else {
+      console.log('checkbox not found message sent');
+      chrome.runtime.sendMessage({message: 'checkbox not found'});
+    }
   } else {
-    console.log('message is not received');
-  }
-  if(elementList.length !== 0) {
-    const itemName = '품목, 단가, 수량, 가격' + '\n' + elementList.join('\n');
-    const blob = new Blob([itemName]);
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'data.csv';
-    link.click();
-  } else {
-    console.log('checkbox not found message sent');
-    chrome.runtime.sendMessage({message: 'checkbox not found'});
+    console.log('message is not handled', request);
   }
 });
 

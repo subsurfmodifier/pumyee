@@ -1,5 +1,5 @@
 body {
-    width: 100px;
+    width: 150px;
     height: 100px;
     padding: 10px;
     display: grid;
@@ -33,3 +33,5 @@ body {
   font-size: 12px;
   padding: 10px;
 }
+
+

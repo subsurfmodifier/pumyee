@@ -4,10 +4,13 @@ const download = document.getElementById('download');
 const warningDiv = document.getElementById('warning');
 const referenceDiv = document.getElementById('reference');
 const wrongWebsiteDiv = document.getElementById('wrongWebsite');
+const gmarket = document.getElementById('gmarket');
+const iscreammall = document.getElementById('iscreammall');
+
 warningDiv.style.display = 'none';
 referenceDiv.style.display = 'none';
-wrongWebsiteDiv.style.display = 'block';
 download.style.display = 'none';
+
 async function addReference() {
   const currentTab =  await chrome.tabs.query({active: true, currentWindow: true});
   if(currentTab[0].url === "https://www.i-screammall.co.kr/order/cart") {
@@ -20,12 +23,11 @@ async function addReference() {
 }
 addReference();
 
-download.addEventListener('click', sendMessage);
-async function sendMessage() {
+download.addEventListener('click', async function() {
   const activeTab = await chrome.tabs.query({active: true, currentWindow: true});
   chrome.tabs.sendMessage(activeTab[0].id, {message: 'download'});
   warningDiv.style.display === 'none';
-}
+});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if(request.message === 'checkbox not found') {
