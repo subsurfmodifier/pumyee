@@ -4,8 +4,7 @@
     "version": "2.0",
     "description": "Converts HTML content to CSV",
     "permissions": [
-      "activeTab",
-      "tabs"
+      "activeTab"
     ],
     "background": {
       "service_worker": "background.js"
