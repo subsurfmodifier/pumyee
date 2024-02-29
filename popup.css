@@ -1,0 +1,37 @@
+body {
+    width: 150px;
+    height: 100px;
+    padding: 10px;
+    display: grid;
+    align-content: center;
+}
+
+#button {
+  width: 50px;
+  height: 5px;
+}
+
+#warning {
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+  padding: 10px;
+}
+
+#reference {
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 10px;
+}
+
+#wrongWebsite {
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 10px;
+}
+
+
